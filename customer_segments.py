@@ -32,12 +32,14 @@ mask[np.triu_indices_from(mask, 1)] = True
 # plot the heatmap
 with sns.axes_style("white"):
     sns.heatmap(corr, mask=mask, annot=True, cmap='RdBu', fmt='+.2f', cbar=False)
+plt.show()
     
 #Scale the data using the natural logarithm
 log_data = np.log(data)
 
 # Produce a scatter matrix for each pair of newly-transformed features
 pd.scatter_matrix(log_data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
+plt.show()
 
 # For each feature find the data points with extreme high or low values
 for feature in log_data.keys():
@@ -70,10 +72,12 @@ reduced_data = pca.transform(good_data)
 
 # Generate PCA results plot
 pca_results = rs.pca_results(good_data, pca)
+plt.show()
 
 # Create a DataFrame for the reduced data
 reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2'])
 pd.scatter_matrix(reduced_data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
+plt.show()
 
 # Assess the silhouette coefficient value in order to know the best number of clusters to choose
 scores = []
@@ -92,6 +96,7 @@ print scores
 
 # Display the results of the clustering from implementation
 rs.cluster_results(reduced_data, preds, centers)
+plt.show()
 
 # Inverse transform the centers
 log_centers = pca.inverse_transform(centers)
